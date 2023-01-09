@@ -1,60 +1,63 @@
+// Program #1:
+// State variables
+//----------------
 let homeScore = 0
 let awayScore = 0
+let value
+let element
 
-// Increment Home score
-function incHome1() {
-    homeScore ++
-    document.getElementById("home-score").innerText = homeScore
-}
-function incHome2() {
-    homeScore += 2
-    document.getElementById("home-score").innerText = homeScore
-}
-function incHome3() {
-    homeScore += 3
-    document.getElementById("home-score").innerText = homeScore
-}
+// DOM variables
+//--------------
+const homeScoreEl = document.getElementById("home-score-el")
+const awayScoreEl = document.getElementById("away-score-el")
+const buttons = document.querySelectorAll(".btn")
+const newGameButton = document.getElementById("new-game-button")
 
 
-// Increment Away score
-function incAway1 () {
-    awayScore ++
-    document.getElementById("away-score").innerText = awayScore
+// event listener for all button elements with the class "btn"
+buttons.forEach(button => {
+    button.addEventListener("click", function() {
+        value = Number(event.target.getAttribute('data-amount'))
+        element = event.target.getAttribute('data-location')
+        increment(element, value)
+    })
+})
+// incremenets scores on UI
+function increment(location, amount) {
+    if (location === "home") {
+        homeScore = homeScore + amount
+        homeScoreEl.innerText = homeScore
+    }
+    if (location === "away") {
+        awayScore = awayScore + amount
+        awayScoreEl.innerText = awayScore
+    }
+    determineWinner()
 }
-function incAway2 () {
-    awayScore += 2
-    document.getElementById("away-score").innerText = awayScore
-}
-function incAway3 () {
-    awayScore += 3
-    document.getElementById("away-score").innerText = awayScore
-}
-
-// Set the scores back to zero
-function newGame () {
-    // Set scores to zero
+// Sets scores back to zero & renders UI
+newGameButton.addEventListener("click", function() {
     homeScore = 0
     awayScore = 0
-    document.getElementById("home-score").innerText = homeScore
-    document.getElementById("away-score").innerText = awayScore
 
-    // Remove winning class value from element
-    document.getElementById("away-score").classList.remove("winning")
-    document.getElementById("home-score").classList.remove("winning")
-}
-
-
-// Highlights the team that is winning
+    homeScoreEl.innerText = homeScore
+    awayScoreEl.innerText = awayScore
+    highlight(awayScoreEl, "remove")
+    highlight(homeScoreEl, "remove")
+})
+// keeps track of who is currently leading in points
 function determineWinner () {
     if (homeScore > awayScore) {
-        document.getElementById("away-score").classList.remove("winning")
-        document.getElementById("home-score").classList.add("winning")
-        console.log(document.getElementById("home-score").classList.value)
+        highlight(awayScoreEl, "remove")
+        highlight(homeScoreEl, "add")
     } else if (awayScore > homeScore) {
-        document.getElementById("home-score").classList.remove("winning")
-        document.getElementById("away-score").classList.add("winning")
+        highlight(homeScoreEl, "remove")
+        highlight(awayScoreEl, "add")
     } else {
-        document.getElementById("home-score").classList.add("winning")
-        document.getElementById("away-score").classList.add("winning")
+        highlight(homeScoreEl, "remove")
+        highlight(awayScoreEl, "remove")
     }
+}
+// highlights the score of the team that is currently leading
+function highlight (el, action) {
+    el.classList[action]("winning")
 }

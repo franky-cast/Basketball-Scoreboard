@@ -16,26 +16,26 @@
 
             <div class="flex-item">
                 <h2 class="title">Home</h2>
-                <h1 class="score" id="home-score">0</h1>
+                <h1 class="score" id="home-score-el">0</h1>
                 <div class="btn-wrapper">
-                    <button class="btn" onclick="incHome1(), determineWinner()">+1</button>
-                    <button class="btn" onclick="incHome2(), determineWinner()">+2</button>
-                    <button class="btn" onclick="incHome3(), determineWinner()">+3</button>
+                    <button class="btn" data-location="home" data-amount="1">+1</button>
+                    <button class="btn" data-location="home" data-amount="2">+2</button>
+                    <button class="btn" data-location="home" data-amount="3">+3</button>
                 </div>
             </div>
 
             <div class="flex-item">
                 <h2 class="title">Away</h2>
-                <h1 class="score" id="away-score">0</h1>
+                <h1 class="score" id="away-score-el">0</h1>
                 <div class="btn-wrapper">
-                    <button class="btn" onclick="incAway1(), determineWinner()">+1</button>
-                    <button class="btn" onclick="incAway2(), determineWinner()">+2</button>
-                    <button class="btn" onclick="incAway3(), determineWinner()">+3</button>
+                    <button class="btn" data-location="away" data-amount="1">+1</button>
+                    <button class="btn" data-location="away" data-amount="2">+2</button>
+                    <button class="btn" data-location="away" data-amount="3">+3</button>
                 </div>
             </div>
         </div>
 
-        <button class="btn new-game-btn" onclick="newGame()">new game</button>
+        <button id="new-game-button" class="btn new-game-btn">new game</button>
     </div>
 
     <script src="./javascript.js"></script>
