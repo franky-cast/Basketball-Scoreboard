@@ -1,4 +1,3 @@
-// Program #1:
 // State variables
 //----------------
 let homeScore = 0
